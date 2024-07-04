@@ -1,0 +1,30 @@
+{
+  "devDependencies": {
+    "cypress": "^13.13.0",
+    "cypress-multi-reporters": "^1.6.4",
+    "junit-report-merger": "^7.0.0",
+    "junit-viewer": "^4.11.1",
+    "mocha": "^10.5.2",
+    "mocha-junit-reporter": "^2.2.1",
+    "typescript": "^5.5.2"
+  },
+  "exports": {
+    "./commands": "./commands"
+  },
+  "name": "cypress-fe-be",
+  "version": "1.0.0",
+  "description": "This project aims to automate the web and api using typescript",
+  "main": "index.js",
+  "scripts": {
+    "delete:reports": "if exist \"cypress\\results\" (rmdir /Q /S \"cypress\\results\" && echo Deleted results) else (echo results dir does not exist)",
+    "delete:screenshots": "if exist \"cypress\\screenshots\" (rmdir /Q /S \"cypress\\screenshots\" && echo Deleted screenshots) else (echo screenshots dir does not exist)",
+    "pretest": "npm run delete:reports && npm run delete:screenshots",
+    "placeHolderForposttestScript": "cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json",
+    "cypress:run": "cypress run",
+    "merge-reports": "jrm \"./cypress/results/merged-test-output.xml\" \"./cypress/results/results-*.xml\"",
+    "generate-html-report": "junit-viewer --results=./cypress/results/merged-test-output.xml --save=cypress/results/test-report.html",
+    "test": "npm run cypress:run && npm run merge-reports && npm run generate-html-report"
+  },
+  "author": "B Mahendar Reddy",
+  "license": "ISC"
+}
